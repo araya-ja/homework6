@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 350px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        input, select, button {
+            margin: 10px 0;
+            padding: 12px;
+            width: calc(100% - 24px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        h3 {
+            margin-top: 15px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🌡 Temperature Converter</h2>
+        <input type="number" id="temperature" placeholder="Enter temperature" autofocus>
+        <select id="unit">
+            <option value="C">Celsius to Fahrenheit</option>
+            <option value="F">Fahrenheit to Celsius</option>
+        </select>
+        <button onclick="convertTemperature()">Convert</button>
+        <h3 id="result"></h3>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            let temp = document.getElementById("temperature").value;
+            let unit = document.getElementById("unit").value;
+            let result;
+            
+            if (temp === "") {
+                document.getElementById("result").innerText = "Please enter a temperature";
+                return;
+            }
+
+            temp = parseFloat(temp);
+            if (isNaN(temp)) {
+                document.getElementById("result").innerText = "Invalid input";
+                return;
+            }
+
+            if (unit === "C") {
+                result = (temp * 9/5) + 32;
+                document.getElementById("result").innerText = `${temp}°C = ${result.toFixed(2)}°F`;
+            } else {
+                result = (temp - 32) * 5/9;
+                document.getElementById("result").innerText = `${temp}°F = ${result.toFixed(2)}°C`;
+            }
+        }
+    </script>
+</body>
+</html>
